@@ -32,8 +32,15 @@ public class Location {
         return "(" + latitude + ", " + longitude + ")";
     }
 
+    @Override
     public boolean equals(Object other) {
-        throw new UnsupportedOperationException();
+        //return this.toString().equals(other.toString());
+        if (other instanceof Location) {
+            Location that = (Location)other;
+            return this.latitude == that.latitude && this.longitude == that.longitude;
+        } else {
+            return false;
+        }
     }
 
     public static void main(String[] args) {
@@ -47,5 +54,6 @@ public class Location {
 
         Location hendrix = new Location(35.0918, -92.4367);
         System.out.println(conway.equals(hendrix));
+        System.out.println(conway.equals(texarkana));
     }
 }
