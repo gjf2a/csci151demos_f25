@@ -1,13 +1,26 @@
+import java.util.Scanner;
+
 public class TicTacToeBoard {
-    private String[][] board;
+    private TicTacToeValue[][] board;
 
     public TicTacToeBoard() {
-        board = new String[3][3];
+        board = new TicTacToeValue[3][3];
         for (int row = 0; row < board.length; row++) {
             for (int col = 0; col < board[row].length; col++) {
-                board[row][col] = "_";
+                board[row][col] = TicTacToeValue.EMPTY;
             }
         }
+    }
+
+    public boolean gameOver() {
+        for (int row = 0; row < board.length; row++) {
+            for (int col = 0; col < board[row].length; col++) {
+                if (board[row][col].isOpen()) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     @Override
@@ -23,14 +36,10 @@ public class TicTacToeBoard {
     }
 
     public boolean isOpen(int row, int col) {
-        if (board[row][col].equals("_")) {
-            return true;
-        } else {
-            return false;
-        }
+        return board[row][col].isOpen();
     }
 
-    public void place(String piece, int row, int col) {
+    public void place(TicTacToeValue piece, int row, int col) {
         if (isOpen(row, col)) {
             board[row][col] = piece;
         }
@@ -38,6 +47,22 @@ public class TicTacToeBoard {
 
     public static void main(String[] args) {
         TicTacToeBoard b = new TicTacToeBoard();
-        System.out.println(b);
+
+        TicTacToeValue currentPlayer = TicTacToeValue.X;
+        Scanner scan = new Scanner(System.in);
+        while (!b.gameOver()) {
+            System.out.println(b);
+            System.out.println("It is the turn of " + currentPlayer);
+            System.out.print("Enter row (0, 1, 2): ");
+            int row = scan.nextInt();
+            System.out.print("Enter column: (0, 1, 2): ");
+            int col = scan.nextInt();
+            if (b.isOpen(row, col)) {
+                b.place(currentPlayer, row, col);
+                currentPlayer = currentPlayer.opponent();
+            } else {
+                System.out.println("That was not a legal move. Try again.");
+            }
+        }
     }
 }
