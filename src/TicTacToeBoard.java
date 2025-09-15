@@ -12,7 +12,78 @@ public class TicTacToeBoard {
         }
     }
 
+    public TicTacToeValue getWinner() {
+        if (isWinner(TicTacToeValue.X)) {
+            return TicTacToeValue.X;
+        } else if (isWinner(TicTacToeValue.O)) {
+            return TicTacToeValue.O;
+        } else {
+            return TicTacToeValue.EMPTY;
+        }
+    }
+
+    public boolean isWinner(TicTacToeValue player) {
+        return isHorizontalWinner(player) || isVerticalWinner(player) || isDiagonalWinner(player);
+    }
+
+    private boolean isDiagonalWinner(TicTacToeValue player) {
+        return positiveDiagonalWinner(player) || negativeDiagonalWinner(player);
+    }
+
+    private boolean negativeDiagonalWinner(TicTacToeValue player) {
+        for (int row = 0; row < board.length; row++) {
+            int col = board.length - 1 - row;
+            if (board[row][col] != player) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean positiveDiagonalWinner(TicTacToeValue player) {
+        for (int pos = 0; pos < board.length; pos++) {
+            if (board[pos][pos] != player) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean isVerticalWinner(TicTacToeValue player) {
+        for (int col = 0; col < board[0].length; col++) {
+            boolean everyoneIsPlayer = true;
+            for (int row = 0; row < board.length; row++) {
+                if (board[row][col] != player) {
+                    everyoneIsPlayer = false;
+                }
+            }
+            if (everyoneIsPlayer) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isHorizontalWinner(TicTacToeValue player) {
+        for (int row = 0; row < board.length; row++) {
+            boolean everyoneIsPlayer = true;
+            for (int col = 0; col < board.length; col++) {
+                if (board[row][col] != player) {
+                    everyoneIsPlayer = false;
+                }
+            }
+            if (everyoneIsPlayer) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean gameOver() {
+        return boardIsFull() || getWinner() != TicTacToeValue.EMPTY;
+    }
+
+    public boolean boardIsFull() {
         for (int row = 0; row < board.length; row++) {
             for (int col = 0; col < board[row].length; col++) {
                 if (board[row][col].isOpen()) {
@@ -63,6 +134,12 @@ public class TicTacToeBoard {
             } else {
                 System.out.println("That was not a legal move. Try again.");
             }
+        }
+
+        if (b.getWinner() == TicTacToeValue.EMPTY) {
+            System.out.println("The game was tied.");
+        } else {
+            System.out.println(b.getWinner() + " won the game!");
         }
     }
 }
