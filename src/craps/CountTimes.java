@@ -1,3 +1,5 @@
+package craps;
+
 public class CountTimes implements Strategy {
     private double money;
     private int countdown;

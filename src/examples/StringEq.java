@@ -1,3 +1,5 @@
+package examples;
+
 public class StringEq {
     public static void main(String[] args) {
         String s = "name"; // new heap allocation

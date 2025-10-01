@@ -1,3 +1,5 @@
+package ttt;
+
 import java.util.Scanner;
 
 public class TicTacToeBoard {

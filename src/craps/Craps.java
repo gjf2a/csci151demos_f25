@@ -1,4 +1,4 @@
-// Make an initial roll
+package craps;// Make an initial roll
 // 2, 3, 12: Lose
 // 7, 11: Win
 // Anything else: "Point"

@@ -1,16 +1,15 @@
-public class UntilGoal implements Strategy {
+package craps;
+
+public class WillBust implements Strategy {
     private double money;
-    private double goal;
 
-    public UntilGoal(double money, double goal) {
+    public WillBust(double money) {
         this.money = money;
-        this.goal = goal;
     }
-
 
     @Override
     public boolean keepGoing() {
-        return money > 0 && money < goal;
+        return money > 0;
     }
 
     @Override

@@ -1,3 +1,5 @@
+package examples;
+
 public class Scorekeeper {
     private int home;
     private int away;

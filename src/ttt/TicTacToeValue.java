@@ -1,3 +1,5 @@
+package ttt;
+
 public enum TicTacToeValue {
     X {
         @Override

@@ -1,4 +1,4 @@
-// North of equator is positive
+package examples;// North of equator is positive
 // East of prime meridian is positive
 
 public class Location {
